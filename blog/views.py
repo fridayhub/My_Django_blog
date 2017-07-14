@@ -10,5 +10,5 @@ def index(request):
     return render(request, 'blog/index.html', context={'post_list':post_list})
 
 def detail(request, pk):
-    post = get_object_or_404(Post, pk = pk)
+    post = get_object_or_404(Post, pk = pk) #根据models中reverse函数返回的pk键值查找对应的内容
     return render(request, 'blog/detail.html', context={'post':post})

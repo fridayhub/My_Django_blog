@@ -56,5 +56,8 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    #'blog:detail'，意思是 blog 应用下的 name=detail 的函数
+    #于是 reverse 函数会去解析这个视图函数对应的 URL，我们这里 detail 对应的规则就是 post/(?P<pk>[0-9]+)/ 这个正则表达式，
+    # 而正则表达式部分会被后面传入的参数 pk 替换
     def get_absolute_url(self):
         return reverse('blog:detail', kwargs={'pk': self.pk})
