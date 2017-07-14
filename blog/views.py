@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404
 from .models import Post
+import markdown
 
 def index(request):
     #order_by 方法对这个返回的 queryset 进行排序。排序依据的字段是 created_time，即文章的创建时间。- 号表示逆序
@@ -11,4 +12,11 @@ def index(request):
 
 def detail(request, pk):
     post = get_object_or_404(Post, pk = pk) #根据models中reverse函数返回的pk键值查找对应的内容
+
+    post.body = markdown.markdown(post.body,
+                                  extensions=[
+                                      'markdown.extensions.extra',
+                                      'markdown.extensions.codehilite',
+                                      'markdown.extensions.toc',
+                                  ])
     return render(request, 'blog/detail.html', context={'post':post})
