@@ -61,3 +61,8 @@ class Post(models.Model):
     # 而正则表达式部分会被后面传入的参数 pk 替换
     def get_absolute_url(self):
         return reverse('blog:detail', kwargs={'pk': self.pk})
+
+    #定义Meta内部类,通过指定一些属性来规定这个类该有的一些特性
+    #此处指定排序方式
+    class Meta:
+        ordering = ['-create_time'] #依据create_time属性值进行排序

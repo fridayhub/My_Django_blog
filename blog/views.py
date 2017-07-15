@@ -9,7 +9,8 @@ from comments.forms import CommentForm
 
 def index(request):
     #order_by 方法对这个返回的 queryset 进行排序。排序依据的字段是 created_time，即文章的创建时间。- 号表示逆序
-    post_list = Post.objects.all().order_by('-create_time')
+    #post_list = Post.objects.all().order_by('-create_time')
+    post_list = Post.objects.all() #添加Meta后删除orderby
     return render(request, 'blog/index.html', context={'post_list':post_list})
 
 def detail(request, pk):
@@ -34,10 +35,10 @@ def detail(request, pk):
 def archives(request, year, month):
     post_list = Post.objects.filter(create_time__year=year,
                                     create_time__month=month
-                                    ).order_by('-create_time')
+                                    )            #.order_by('-create_time')
     return render(request, 'blog/index.html', context={'post_list':post_list})
 
 def category(request, pk):
     cate = get_object_or_404(Category, pk=pk) #根据主键值取得分类的名字
-    post_list = Post.objects.filter(category=cate).order_by('-create_time')
+    post_list = Post.objects.filter(category=cate)    #.order_by('-create_time')
     return render(request, 'blog/index.html', context={'post_list':post_list})
