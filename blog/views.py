@@ -27,6 +27,9 @@ def index(request):
 def detail(request, pk):
     post = get_object_or_404(Post, pk = pk) #根据models中reverse函数返回的pk键值查找对应的内容
 
+    #方法很笨,没访问一次+1  已有再优化
+    post.increase_views()
+
     post.body = markdown.markdown(post.body,
                                   extensions=[
                                       'markdown.extensions.extra',

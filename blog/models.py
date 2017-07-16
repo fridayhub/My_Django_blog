@@ -53,6 +53,13 @@ class Post(models.Model):
     #一个文章只能有一个作者,一个作者会有多篇文章,因此是一对多
     author = models.ForeignKey(User)
 
+    #新增views字段记录阅读量
+    views = models.PositiveIntegerField(default=0)
+
+    def increase_views(self):
+        self.views += 1
+        self.save(update_fields=['views'])
+
     def __str__(self):
         return self.title
 
