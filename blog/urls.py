@@ -22,6 +22,8 @@ app_name = 'blog' #告诉 Django 这个 urls.py 模块是属于 blog 应用的�
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^post/(?P<pk>[0-9]+)/$', views.detail, name='detail'),
+    url(r'about', views.about, name='about'),
+    url(r'contact', views.contact, name='contact'),
 
     #两个括号括起来的地方是两个命名组参数，Django 会从用户访问的 URL 中自动提取这两个参数的值，然后传递给其对应的视图函数。
     url(r'archives/(?P<year>[0-9]{4})/(?P<month>[0-9]{1,2})/$', views.archives, name='archives'),

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/static/css/pace.css">
     <link rel="stylesheet" href="/static/css/custom.css">
     <link rel="stylesheet" href="/static/css/highlights/github.css">
+    <link rel="stylesheet" href="/static/css/about.css">
 
     <!-- js -->
     <script src="/static/js/jquery-2.1.3.min.js"></script>
@@ -43,9 +44,10 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li class="cl-effect-11"><a href="{%url 'blog:index' %}" data-hover="首页">首页</a></li>
-                            <li class="cl-effect-11"><a href="full-width.html" data-hover="博客">博客</a></li>
-                            <li class="cl-effect-11"><a href="about.html" data-hover="关于">关于</a></li>
-                            <li class="cl-effect-11"><a href="contact.html" data-hover="联系">联系</a></li>
+                            <li class="cl-effect-11"><a href="{%url 'blog:about' %}" data-hover="关于">关于</a></li>
+                            <!--
+                            <li class="cl-effect-11"><a href="{%url 'blog:contact' %}" data-hover="联系">联系</a></li>
+                            -->
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </nav>
@@ -63,7 +65,7 @@
     </header>
 </div>
 <div class="copyrights">Collect from <a href="http://www.cssmoban.com/">网页模板</a></div>
-<div class="copyrights">Modified by <a href="http://jinghang.com/">JHang的博客</a></div>
+<div class="copyrights">Modified by <a href="http://jinghang.com/">hakits的博客</a></div>
 
 <div class="content-body">
     <div class="container">
@@ -108,7 +110,7 @@
                     <ul>
                         {% for category in category_list %}
                         <li>
-                            <a href="{% url 'blog:category' category.pk %}">{{ category.name }} <span class="post-count">(13)</span></a>
+                            <a href="{% url 'blog:category' category.pk %}">{{ category.name }} <span class="post-count">({{ category.num_posts}})</span></a>
                         </li>
                         {% empty %}
                         暂无分类!
@@ -126,7 +128,7 @@
                             <a href="#">Python</a>
                         </li>
                         <li>
-                            <a href="#">Java</a>
+                            <a href="#">Linux</a>
                         </li>
                         <li>
                             <a href="#">笔记</a>
@@ -135,36 +137,47 @@
                             <a href="#">文档</a>
                         </li>
                         <li>
-                            <a href="#">AngularJS</a>
+                            <a href="#">C语言</a>
                         </li>
                         <li>
-                            <a href="#">CSS</a>
+                            <a href="#">Git</a>
                         </li>
                         <li>
-                            <a href="#">JavaScript</a>
+                            <a href="#">Vim</a>
                         </li>
                         <li>
-                            <a href="#">Snippet</a>
+                            <a href="#">数据库</a>
                         </li>
                         <li>
-                            <a href="#">jQuery</a>
+                            <a href="#">安全</a>
                         </li>
                     </ul>
-                </div>
-                <div class="rss">
-                    <a href=""><span class="ion-social-rss-outline"></span> RSS 订阅</a>
                 </div>
             </aside>
         </div>
     </div>
 </div>
+
+<!--当页面为about页面时 隐藏右边侧栏-->
+<script type="text/javascript">
+	(function() {
+       var query = window.location.pathname;
+       //console.log(query);
+       if (query == '/about' || query == '/about.html')
+       {
+       	//	console.log("I Cache you!")
+			$(".widget").hide();
+       }
+	})();
+</script>
+
 <footer id="site-footer">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <p class="copyright">&copy 2017 - 采集自<a href="http://www.cssmoban.com/"
                                                         target="_blank" title="模板之家">模板之家</a>
-                    - 由<a href="http://JHang.com/" title="网页模板" target="_blank">JHang</a>修改
+                    - 由<a href="http://hakits.com/" title="网页模板" target="_blank">hakits</a>修改
                 </p>
             </div>
         </div>
@@ -187,12 +200,11 @@
 <script src="/static/js/script.js"></script>
 
 <!--蜘蛛网背景效果--->
-<script type="text/javascript" color="255,0,0" opacity="0.5" src="/static/js/canvas-nest.min.js"></script>
+<script type="text/javascript" color="5,39,175" opacity="0.5" src="/static/js/canvas-nest.min.js"></script>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/static/js/love.js"></script>
 <!--可变丝带-->
 <script type="text/javascript" alpha="0.2" src="/static/js/ribbon.min.js"></script>
-
 
 </body>
 </html>

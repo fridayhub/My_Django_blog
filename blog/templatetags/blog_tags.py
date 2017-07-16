@@ -3,6 +3,7 @@
 
 from django import template
 from ..models import Post, Category
+from django.db.models.aggregates import Count
 
 register = template.Library()
 
@@ -18,6 +19,9 @@ def archives():
     return Post.objects.dates('create_time', 'month', order='DESC')
 
 #分类模板标签
+#annotate 做的事情就是把全部 Category 取出来，然后去 Post 查询每一个 Category 对应的文章，
+#查询完成后做一个聚合，统计每个 Category 有多少篇文章，把这个统计数字保存到 Category 的 num_posts
+#属性里（注意 Category 本身没有这个属性，是 Python 动态添加上去的）
 @register.simple_tag
 def get_categories():
-    return Category.objects.all()
+    return Category.objects.annotate(num_posts=Count('post'))

@@ -42,3 +42,9 @@ def category(request, pk):
     cate = get_object_or_404(Category, pk=pk) #根据主键值取得分类的名字
     post_list = Post.objects.filter(category=cate)    #.order_by('-create_time')
     return render(request, 'blog/index.html', context={'post_list':post_list})
+
+def about(request):
+    return render(request, 'about.html')
+
+def contact(request):
+    return render(request, 'contact.html')
