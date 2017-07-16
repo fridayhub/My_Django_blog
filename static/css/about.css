@@ -1,7 +1,6 @@
 
 @charset "gb2312";
 /* CSS Document */
-* { margin: 0; padding: 0 }
 body { font: 14px "宋体", Arial, Helvetica, sans-serif; color: #585254 }
 img { border: 0; display: block }
 ul { list-style: none; }
@@ -9,7 +8,7 @@ a:link, a:visited {text-decoration: none; color: #333;}
 .left { float: left; }
 .right { float: right; }
 .blank { height: 5px; overflow: hidden; width: 100%; margin: auto; clear: both }
-article { width: 1000px; margin: 20px auto; overflow: hidden }
+.aboutcon{ width: 1000px; margin: 20px auto; overflow: hidden }
 aside { width: 250px;position: relative;margin-top: 10px; }
 
 

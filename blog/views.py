@@ -6,6 +6,17 @@ from .models import Post, Category
 import markdown
 from comments.forms import CommentForm
 
+def search(request):
+    q = request.GET.get('sq') #获取get提交的参数
+    error_msg = ''
+
+    if not q:
+        error_msg = '请输入关键词'
+        return render(request, 'blog/results.html', {'error_msg':error_msg})
+
+    post_list = Post.objects.filter(title__icontains = q)
+    return render(request, 'blog/results.html', {'error_msg': error_msg,
+                                                 'post_list': post_list})
 
 def index(request):
     #order_by 方法对这个返回的 queryset 进行排序。排序依据的字段是 created_time，即文章的创建时间。- 号表示逆序
@@ -45,6 +56,3 @@ def category(request, pk):
 
 def about(request):
     return render(request, 'about.html')
-
-def contact(request):
-    return render(request, 'contact.html')

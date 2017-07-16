@@ -45,17 +45,14 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="cl-effect-11"><a href="{%url 'blog:index' %}" data-hover="首页">首页</a></li>
                             <li class="cl-effect-11"><a href="{%url 'blog:about' %}" data-hover="关于">关于</a></li>
-                            <!--
-                            <li class="cl-effect-11"><a href="{%url 'blog:contact' %}" data-hover="联系">联系</a></li>
-                            -->
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </nav>
                 <div id="header-search-box">
                     <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
                     <div id="search-form" class="search-form">
-                        <form role="search" method="get" id="searchform" action="#">
-                            <input type="search" placeholder="搜索" required>
+                        <form role="search" method="get" id="searchform" action="/search/">
+                            <input type="search" placeholder="搜索" required name="sq">
                             <button type="submit"><span class="ion-ios-search-strong"></span></button>
                         </form>
                     </div>
@@ -83,7 +80,7 @@
                     <ul>
                         {% for post in recent_post_list %}
                         <li>
-                            <a href="#">{{ post.title }}</a>
+                            <a href="{% url 'blog:detail' post.pk %}">{{ post.title }}</a>
                         </li>
                         {% empty %}
                         暂无文章!
@@ -163,7 +160,7 @@
 	(function() {
        var query = window.location.pathname;
        //console.log(query);
-       if (query == '/about' || query == '/about.html')
+       if (query == '/about' || query == '/about.html' || query == '/about/')
        {
        	//	console.log("I Cache you!")
 			$(".widget").hide();
@@ -190,9 +187,7 @@
     <nav>
         <ul>
             <li><a href="index.html">首页</a></li>
-            <li><a href="full-width.html">博客</a></li>
             <li><a href="about.html">关于</a></li>
-            <li><a href="contact.html">联系</a></li>
         </ul>
     </nav>
 </div>
