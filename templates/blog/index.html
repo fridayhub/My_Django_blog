@@ -17,7 +17,11 @@
         </div>
     </header>
     <div class="entry-content clearfix">
+        <!-- 文章摘要字段 方法1
         <p>{{ post.excerpt }}</p>
+        -->
+        <!-- 模板过滤器方式-->
+        <p>{{ post.body | truncatechars:35}}</p>
         <div class="read-more cl-effect-14">
             <a href="{{ post.get_absolute_url }}" target="_blank" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
         </div>
