@@ -7,6 +7,7 @@ import markdown
 from comments.forms import CommentForm
 
 from django.views.generic import ListView
+from django.db.models import Q
 
 class IndexView(ListView):
     model = Post
@@ -136,7 +137,9 @@ def search(request):
         error_msg = '请输入关键词'
         return render(request, 'blog/results.html', {'error_msg':error_msg})
 
-    post_list = Post.objects.filter(title__icontains = q)
+    #icontains 是查询表达式（Field lookups）  i是指不去分大小写,用法就是在需要筛选的模型后面加两个下划线
+    #Q 对象用于包装查询表达式
+    post_list = Post.objects.filter(Q(title__icontains = q) | Q(body__icontains =q))
     return render(request, 'blog/results.html', {'error_msg': error_msg,
                                                  'post_list': post_list})
 
