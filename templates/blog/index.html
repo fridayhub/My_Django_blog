@@ -22,6 +22,7 @@
         -->
         <!-- 模板过滤器方式-->
         <p>{{ post.body | truncatechars:35}}</p>
+
         <div class="read-more cl-effect-14">
             <a href="{{ post.get_absolute_url }}" target="_blank" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
         </div>
@@ -38,17 +39,33 @@
     <a href="#">下一页</a>
 </div>
 -->
-<div class="pagination">
-    <ul>
-        <li><a href="">1</a></li>
-        <li><a href="">...</a></li>
-        <li><a href="">4</a></li>
-        <li><a href="">5</a></li>
-        <li class="current"><a href="">6</a></li>
-        <li><a href="">7</a></li>
-        <li><a href="">8</a></li>
-        <li><a href="">...</a></li>
-        <li><a href="">11</a></li>
-    </ul>
-</div>
+    {% if is_paginated %}
+        <div class="pagination">
+            <ul>
+                {% if first %}
+                    <li><a class="page" href="?page=1">1</a></li>
+                {% endif %}
+                {% if left %}
+                    {% if left_has_more %}
+                        <li><span>...</span></li>
+                    {% endif %}
+                    {% for i in left %}
+                        <li><a class="page" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endfor %}
+                {% endif %}
+                <li><a class="current page current" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
+                {% if right %}
+                    {% for i in right %}
+                        <li><a class="page" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endfor %}
+                    {% if right_has_more %}
+                        <li><span>...</span></li>
+                    {% endif %}
+                {% endif %}
+                {% if last %}
+                    <li><a href="?page={{ paginator.num_pages }}" class="page">{{ paginator.num_pages }}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    {% endif %}
 {% endblock main %}

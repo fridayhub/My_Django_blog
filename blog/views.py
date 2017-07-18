@@ -6,6 +6,115 @@ from .models import Post, Category
 import markdown
 from comments.forms import CommentForm
 
+from django.views.generic import ListView
+
+class IndexView(ListView):
+    model = Post
+    template_name = 'blog/index.html'
+    context_object_name = 'post_list'
+    paginate_by = 3
+
+    def get_context_data(self, **kwargs):
+        '''
+        在视图函数中将模板变量通过render函数的context参数传给一个字典,
+        在类视图中,这个模板字典通过get_context_data获得,所以要复写该方法,插入一些自定义模板变量
+        '''
+
+        #首先获得父类生成的传递给模板的字典。
+        context = super().get_context_data(**kwargs)
+
+        #父类字典中已有 paginator、page_obj、is_paginated 这三个模板变量，
+        #paginator 是 Paginator 的一个实例， page_obj 是 Page 的一个实例， is_paginated 是一个布尔变量，用于指示是否已分页。
+        paginator = context.get('paginator')
+        page = context.get('page_obj')
+        is_paginated = context.get('is_paginated')
+
+        pagination_data = self.pagination_data(paginator, page, is_paginated)
+
+        #分页导航条的模板变量更新到 context 中，pagination_data 方法返回的也是一个字典。
+        context.update(pagination_data)
+
+        #context更新后返回,便于ListView根据context渲染模板
+        return context
+
+    def pagination_data(self, paginator, page, is_paginated):
+        if not is_paginated:
+            #当没有足够的数据条数分页时 不需要分页
+            return {}
+
+        #当前页的左右页码号
+        left = []
+        right = []
+
+        # 标示第 1 页页码后是否需要显示省略号
+        left_has_more = False
+        right_has_more = False
+
+        #当 当前页的左边已经可以显示出1页时,则不必重复显示第1页
+        first = False
+        last = False
+
+        #当前页码
+        page_number = page.number
+
+        #分页后的总页数
+        total_pages = paginator.num_pages
+        print(total_pages)
+
+        #整个分页的页码表,如果分了四页则应该是:[1, 2, 3, 4]
+        page_range = paginator.page_range
+        print(page_range)
+
+        if page_number == 1:
+            # 如果用户请求的是第一页的数据，那么当前页左边的不需要数据，因此 left=[]（已默认为空）。
+            # 此时只要获取当前页右边的连续页码号，
+            # 比如分页页码列表是 [1, 2, 3, 4]，那么获取的就是 right = [2, 3]。
+            # 注意这里只获取了当前页码后连续两个页码，可以更改这个数字以获取更多页码。
+            right = page_range[page_number:page_number + 2]
+
+            #最右边的页不是最后一页  需要显示省略号
+            if right[-1] < total_pages -1:
+                right_has_more = True
+
+            # 如果最右边的页码号比最后一页的页码号小，说明当前页右边的连续页码号中不包含最后一页的页码
+            # 所以需要显示最后一页的页码号，通过 last 来指示
+            if right[-1] <total_pages:
+                last = True
+
+        elif page_number == total_pages:
+            left = page_range[(page_number - 3) if (page_number -3) > 0 else 0:page_number - 1]
+
+            if left[0] > 2:
+                left_has_more = True
+
+            if left[0] > 1:
+                first = True
+
+        else:
+            left = page_range[(page_number - 3) if (page_number -3) > 0 else 0:page_number - 1]
+            right = page_range[page_number:page_number + 2]
+
+            if right[-1] < total_pages -1:
+                right_has_more = True
+            if right[-1] < total_pages:
+                last = True
+
+            if left[0] > 2:
+                left_has_more = True
+            if left[0] > 1:
+                first = True
+
+        data = {
+            'left': left,
+            'right': right,
+            'left_has_more': left_has_more,
+            'right_has_more': right_has_more,
+            'first': first,
+            'last': last,
+        }
+
+        return data
+
 def search(request):
     q = request.GET.get('sq') #获取get提交的参数
     error_msg = ''
