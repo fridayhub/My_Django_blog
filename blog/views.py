@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Category
+from .models import Post, Category, Tag
 import markdown
 from comments.forms import CommentForm
 
@@ -59,11 +59,11 @@ class IndexView(ListView):
 
         #分页后的总页数
         total_pages = paginator.num_pages
-        print(total_pages)
+        #print(total_pages)
 
         #整个分页的页码表,如果分了四页则应该是:[1, 2, 3, 4]
         page_range = paginator.page_range
-        print(page_range)
+        #print(page_range)
 
         if page_number == 1:
             # 如果用户请求的是第一页的数据，那么当前页左边的不需要数据，因此 left=[]（已默认为空）。
@@ -82,6 +82,7 @@ class IndexView(ListView):
                 last = True
 
         elif page_number == total_pages:
+            # 如果用户请求的是最后一页的数据
             left = page_range[(page_number - 3) if (page_number -3) > 0 else 0:page_number - 1]
 
             if left[0] > 2:
@@ -114,6 +115,18 @@ class IndexView(ListView):
         }
 
         return data
+
+class TagView(ListView):
+    model = Post
+    template_name = 'blog/index.html'
+    context_object_name = 'post_list'
+
+    #复写了父类的 get_queryset 方法
+    def get_queryset(self):
+        #在类视图中,从URL捕获的命名组参数值都保存在实例的kwargs属性的字典里
+        #非命名组参数值保存在实例的args属性列表里
+        tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
+        return super(TagView, self).get_queryset().filter(tags=tag)
 
 def search(request):
     q = request.GET.get('sq') #获取get提交的参数

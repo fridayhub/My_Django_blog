@@ -243,6 +243,7 @@ img {
 .post-category::after,
 .post-date::after,
 .post-author::after,
+.post-tag::before,
 .comments-link::after {
     content: ' ·';
     color: #000;
