@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    <title>{{ post.title }}</title>
+{% endblock %}
+
 {% block main %}
 <article class="post post-{{ post.pk }}" xmlns="http://www.w3.org/1999/html">
     <header class="entry-header">
