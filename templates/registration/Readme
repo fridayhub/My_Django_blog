@@ -1,0 +1,6 @@
+password_change_form.html: 修改密码的的视图
+password_change_done.html: 密码修改成功后，Django 会把用户跳转到密码修改成功页面
+password_reset_form.html: 重置密码模板
+password_reset_done.html: 用户在重置密码页面输入注册时的邮箱后，Django 会把用户跳转到邮件发送成功页面
+password_reset_confirm.html: 在接收到的重置密码邮件中有一个设置新密码的链接，点击该链接就会跳转到给账户设置新密码的页面，以便用户给已忘记密码的账户设置一个全新的密码。
+password_reset_complete.html: 用户在设置新密码页面输入新密码后，Django 会把用户跳转到设置新密码成功页面

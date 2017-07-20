@@ -1,21 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+{% extends 'loginbase.html' %}
+{% block title %}
     <title>注册</title>
-    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
-    <style>
-        .errorlist {
-            color: red;
-        }
-    </style>
-</head>
-<body>
-<div class="flex-center">
-    <div class="container">
-        <div class="unit-1-2 unit-1-on-mobile">
+{% endblock %}
+
+{% block userbody %}
            <h3>欢迎注册</h3>
             <form class="form" action="{% url 'users:register' %}" method="post">
                 {% csrf_token %}
@@ -33,8 +21,4 @@
             <div class="flex-center top-gap text-samll">
                 <a href="/login">已有账号登陆</a>
             </div>
-        </div>
-    </divc>
-</div>
-</body>
-</html>
+{% endblock %}
