@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 """blogproject URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -16,7 +17,6 @@ Including another URLconf
 from django.conf.urls import url
 
 from . import views
-#-*- coding: utf-8 -*-
 
 app_name = 'blog' #告诉 Django 这个 urls.py 模块是属于 blog 应用的，这种技术叫做视图函数命名空间
 urlpatterns = [

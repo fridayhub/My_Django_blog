@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 """
 Django settings for blogproject project.
 
@@ -26,6 +27,7 @@ SECRET_KEY = 'uza=jbt08(8#f16q)8v%-i7i2u*su!m(*wsw=-(_gtw7_q=0!p'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+AUTH_USER_MODEL = 'users.User'
 
 
 # Application definition
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
     'blog',
     'comments',
 ]
@@ -91,7 +94,7 @@ DATABASES = {
 }
 
 '''
-#打印sql语句用
+#print sql
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -132,6 +135,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
+
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
 
 #LANGUAGE_CODE = 'en-us'
 LANGUAGE_CODE = 'zh-hans'

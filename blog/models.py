@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django.contrib.auth.models  import User
 from django.utils.six import python_2_unicode_compatible
 from django.urls import reverse
 
@@ -51,7 +50,7 @@ class Post(models.Model):
     #django.contrib.auth 是Django内置的应用,专门用来处理网站用户的注册和登陆等流程,User是Django内置的用户模型
     #此处通过ForeignKey把文章和User关联了起来.
     #一个文章只能有一个作者,一个作者会有多篇文章,因此是一对多
-    author = models.ForeignKey(User)
+    author = models.ForeignKey('users.User')
 
     #新增views字段记录阅读量
     views = models.PositiveIntegerField(default=0)
