@@ -17,10 +17,10 @@
                 <button class="btn btn-default"><a href="{% url 'logout' %}?next={{ request.path }}">注销登录</a></button>
             {% else %}
                 <p>你还没有登录，请
-                    <button class="btn btn-default"><a href="{% url 'login' %}">登录</a></button>
+                    <button class="btn btn-default"><a href="{% url 'login' %}?next={{ request.path }}">登录</a></button>
                     或者
                     <button class="btn btn-default"><a href="{% url 'users:register' %}?next={{ request.path }}">注册</a></button>
-                    <input type="hidden" name="next" value="{{ next }}"
+                    <input type="hidden" name="next" value="{{ next }}">
                 </p>
             {% endif %}
         </div>

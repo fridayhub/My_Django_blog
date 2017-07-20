@@ -150,9 +150,6 @@ img {
     color: #000000 !important;
     padding: 0 0 5px 0 !important;
     margin-right: 30px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    font-size: 24px;
 }
 
 .main-nav a:active,
@@ -182,6 +179,15 @@ img {
     padding: 10px 0;
     color: #0972b4;
     text-shadow: none;
+}
+#login{
+   font-size: 13px;
+}
+
+#headtitle{
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 24px;
 }
 
 .cl-effect-11 a::before {
