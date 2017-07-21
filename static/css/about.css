@@ -27,3 +27,25 @@ h1.t_nav span{float:right; color:#999}
 .about_c{ padding:10px 0 0 10px; color:#999; line-height:26px; }
 .about_c img{ margin:5px 0}
 .about_c span{ color:#19A566}
+
+
+/*返回顶部*/
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #99b5ea;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#myBtn:hover {
+  background-color: #b7bcfd;
+}

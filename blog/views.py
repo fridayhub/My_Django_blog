@@ -163,7 +163,7 @@ def detail(request, pk):
                                   ])
     form = CommentForm() #Django 自动创建的html  表单
     # 获取这篇 post 下的全部评论
-    comment_list = post.comment_set.all()
+    comment_list = post.comment_set.all().order_by('-created_time')
     context = {'post': post,
                'form': form, #包含了自动生成 HTML 表单的全部数据
                'comment_list': comment_list
@@ -184,3 +184,8 @@ def category(request, pk):
 
 def about(request):
     return render(request, 'about.html')
+
+def author(request, pk):
+    auth = get_object_or_404(Post, pk=pk)
+    post_list = Post.objects.filter(author=auth.author)  #匹配出所有该作者的文章
+    return render(request, 'blog/index.html', context={'post_list':post_list})

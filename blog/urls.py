@@ -31,4 +31,5 @@ urlpatterns = [
     #两个括号括起来的地方是两个命名组参数，Django 会从用户访问的 URL 中自动提取这两个参数的值，然后传递给其对应的视图函数。
     url(r'archives/(?P<year>[0-9]{4})/(?P<month>[0-9]{1,2})/$', views.archives, name='archives'),
     url(r'^category/(?P<pk>[0-9]+)/$', views.category, name='category'),
+    url(r'^author/(?P<pk>[0-9]+)/$', views.author, name='author'),
 ]
