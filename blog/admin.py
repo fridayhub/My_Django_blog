@@ -11,3 +11,6 @@ class PostAdmin(admin.ModelAdmin):
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category)
 admin.site.register(Tag)
+
+admin.site.site_header = "Hakit 后台管理"
+admin.site.site_title = "Hakit's Blog"
