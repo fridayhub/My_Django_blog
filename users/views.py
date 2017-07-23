@@ -7,8 +7,6 @@ def register(request):
     #从get或者post中获取next参数; get中next通过url传递:/?next=value,
     #post中next通过表单传递
     redirect_to = request.POST.get('next', request.GET.get('next', ''))
-    print('print redirect_to')
-    print(redirect_to)
 
     #只有请求为POST时,才表示注册信息提交
     if request.method == 'POST':
@@ -28,7 +26,6 @@ def register(request):
 
     else:
         #不是POST访问,表明正准备注册,则展示一个空表单
-        print('4')
         form = RegisterForm()
 
         #同时如果数据不合法,返回一个带有错误信息的表单

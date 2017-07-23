@@ -54,8 +54,7 @@
                                 <li id="login" class="cl-effect-11"><a href="{% url 'logout' %}?next={{ request.path }}" data-hover="注销">注销</a></li>
                             {% else %}
                                 <li id="login" class="cl-effect-11"><a href="{% url 'login' %}?next={{ request.path }}" data-hover="登陆">登陆</a></li>
-                                <li id="login" class="cl-effect-11"><a href="{% url 'users:register' %}?next={{ request.path }}' %}" data-hover="注册">注册</a></li>
-                                <input type="hidden" name="next" value="{{ next }}">
+                                <li id="login" class="cl-effect-11"><a href="{% url 'users:register' %}?next={{ request.path }}" data-hover="注册">注册</a></li>
                             {% endif %}
                         </ul>
                     </div><!-- /.navbar-collapse -->
